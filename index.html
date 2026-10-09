@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta
+      name="description"
+      content="BillSync 固定支出管家：整合帳單辨識、固定支出管理與 Google Calendar 提醒的 Web 應用作品介紹。"
+    >
+    <meta name="theme-color" content="#f5f6f2">
+    <title>BillSync｜固定支出管家</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">跳至主要內容</a>
+
+    <header class="site-header">
+      <div class="container nav-wrap">
+        <a class="brand" href="#top" aria-label="BillSync 首頁">
+          <span class="brand-mark" aria-hidden="true">B</span>
+          <span>BillSync</span>
+        </a>
+        <nav aria-label="主要導覽">
+          <a href="#flow">產品流程</a>
+          <a href="#features">功能</a>
+          <a href="#architecture">架構</a>
+          <a href="#quality">品質</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main-content">
+      <section class="hero section" id="top">
+        <div class="container hero-grid">
+          <div class="hero-copy">
+            <div class="eyebrow"><span class="status-dot" aria-hidden="true"></span>Core MVP complete</div>
+            <h1>讓每一筆固定支出，<br><span>準時出現在行事曆。</span></h1>
+            <p class="hero-lede">
+              BillSync／固定支出管家，是一個將固定支出、帳單辨識與 Google Calendar
+              提醒整合在一起的 Web 應用。
+            </p>
+            <div class="hero-actions">
+              <span class="button button-primary is-disabled" aria-disabled="true">Live Demo · Coming soon</span>
+              <a class="button button-secondary" href="https://github.com/R901111" target="_blank" rel="noopener noreferrer">
+                GitHub Profile<span aria-hidden="true"> ↗</span>
+              </a>
+            </div>
+            <p class="hero-note">目前完成核心 MVP 與上線前安全強化，下一步是 Production deployment。</p>
+          </div>
+
+          <div class="product-preview" aria-label="BillSync 介面概念示意">
+            <div class="preview-topbar">
+              <div class="preview-brand"><span></span>固定支出管家</div>
+              <div class="preview-user" aria-hidden="true">R</div>
+            </div>
+            <div class="preview-total">
+              <span>本月固定支出</span>
+              <strong>NT$12,500</strong>
+              <small>共 5 筆固定支出</small>
+            </div>
+            <div class="preview-list" aria-hidden="true">
+              <div><time>05</time><span>房租</span><strong>NT$8,000</strong><i>已同步</i></div>
+              <div><time>10</time><span>中華電信</span><strong>NT$1,399</strong><i>已同步</i></div>
+              <div><time>15</time><span>訂閱服務</span><strong>NT$460</strong><i class="pending">待確認</i></div>
+            </div>
+            <div class="preview-input" aria-hidden="true">
+              <span>每月 15 號 房租 8000</span>
+              <b>解析</b>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section problem-section" id="problem">
+        <div class="container split-heading">
+          <div>
+            <p class="section-kicker">01 / Problem</p>
+            <h2>記住付款，比記下消費更難。</h2>
+          </div>
+          <div class="problem-copy">
+            <p>
+              固定支出散落在不同帳單與不同日期，有些金額固定，有些每期都會改變。
+              傳統記帳工具擅長記錄「已經花掉的錢」，卻不一定適合管理「接下來要付的款項」。
+            </p>
+            <ul class="plain-list">
+              <li><span>01</span>固定支出容易忘記繳費</li>
+              <li><span>02</span>不同帳單的到期日分散</li>
+              <li><span>03</span>水電等費用每期金額不同</li>
+              <li><span>04</span>未來付款提醒與歷史記帳需求不同</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="flow">
+        <div class="container">
+          <div class="section-heading">
+            <p class="section-kicker">02 / Product flow</p>
+            <h2>多種輸入，共用一條可確認的資料流程。</h2>
+            <p>AI 只負責提出結構化結果；使用者確認後，資料才會進入固定支出與提醒流程。</p>
+          </div>
+
+          <div class="flow" aria-label="BillSync 產品流程">
+            <div class="flow-sources">
+              <div class="flow-node"><span>01</span><strong>帳單上傳</strong><small>JPG · PNG · PDF</small></div>
+              <div class="flow-node"><span>02</span><strong>快速輸入</strong><small>deterministic parser</small></div>
+              <div class="flow-node"><span>03</span><strong>手動輸入</strong><small>shared form</small></div>
+            </div>
+            <span class="flow-arrow" aria-hidden="true">→</span>
+            <div class="flow-node flow-emphasis"><span>04</span><strong>確認資料</strong><small>使用者可修改</small></div>
+            <span class="flow-arrow" aria-hidden="true">→</span>
+            <div class="flow-node"><span>05</span><strong>FixedExpense</strong><small>Occurrence tracking</small></div>
+            <span class="flow-arrow" aria-hidden="true">→</span>
+            <div class="flow-node"><span>06</span><strong>Calendar</strong><small>all-day reminder</small></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section tinted-section" id="features">
+        <div class="container">
+          <div class="section-heading compact">
+            <p class="section-kicker">03 / Features</p>
+            <h2>從輸入、追蹤到同步，維持清楚的責任邊界。</h2>
+          </div>
+          <div class="feature-grid">
+            <article class="feature feature-wide accent-feature">
+              <div class="feature-icon" aria-hidden="true">AI</div>
+              <h3>AI 帳單解析</h3>
+              <p>從圖片或 PDF 提取名稱、金額與到期日，並保留人工確認步驟，避免解析結果直接成為正式資料。</p>
+            </article>
+            <article class="feature">
+              <div class="feature-icon" aria-hidden="true">Aa</div>
+              <h3>快速與手動輸入</h3>
+              <p>支援 deterministic quick input 與共用確認表單，不依賴 LLM 猜測自然語言。</p>
+            </article>
+            <article class="feature">
+              <div class="feature-icon" aria-hidden="true">↻</div>
+              <h3>Recurring model</h3>
+              <p>FixedExpense 保存規則，Occurrence 保存每期事實；週期與金額行為彼此獨立。</p>
+            </article>
+            <article class="feature">
+              <div class="feature-icon" aria-hidden="true">31</div>
+              <h3>Calendar sync</h3>
+              <p>建立全天提醒，具備重複防護、更新與可恢復的 retry 行為。</p>
+            </article>
+            <article class="feature">
+              <div class="feature-icon" aria-hidden="true">ID</div>
+              <h3>Google login</h3>
+              <p>以 Google OIDC 建立應用程式身份，資料透過內部 user ownership 隔離。</p>
+            </article>
+            <article class="feature feature-wide">
+              <div class="feature-icon" aria-hidden="true">375</div>
+              <h3>Responsive & Traditional Chinese UX</h3>
+              <p>桌面與 375px 行動版皆可操作；錯誤訊息以繁體中文呈現，避免將後端 stack trace 暴露給使用者。</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="architecture">
+        <div class="container architecture-grid">
+          <div class="section-heading sticky-heading">
+            <p class="section-kicker">04 / Architecture</p>
+            <h2>刻意保持簡單，讓每一層都容易理解與驗證。</h2>
+            <p>單體 FastAPI 應用搭配 SQLite，優先完成可運作的 MVP，而不是提前引入分散式架構。</p>
+          </div>
+
+          <div class="stack-list">
+            <article class="stack-card">
+              <span class="stack-number">01</span>
+              <div><h3>Frontend</h3><p>HTML · CSS · JavaScript</p><small>單頁操作介面、響應式布局、共用確認流程</small></div>
+            </article>
+            <article class="stack-card">
+              <span class="stack-number">02</span>
+              <div><h3>Backend</h3><p>Python · FastAPI · Pydantic</p><small>API、驗證、OAuth、Calendar 與 OCR orchestration</small></div>
+            </article>
+            <article class="stack-card">
+              <span class="stack-number">03</span>
+              <div><h3>Database</h3><p>SQLite</p><small>帳單、固定支出、Occurrence、同步狀態與憑證資料</small></div>
+            </article>
+            <article class="stack-card">
+              <span class="stack-number">04</span>
+              <div><h3>External services</h3><p>Google OIDC · OAuth 2.0 · Calendar API · OpenAI Responses API</p><small>登入與 Calendar 授權分離；AI 呼叫有明確成本與隱私邊界</small></div>
+            </article>
+            <article class="stack-card">
+              <span class="stack-number">05</span>
+              <div><h3>Engineering</h3><p>Pytest · Playwright · Ruff · pip-tools · pip-audit</p><small>Git · GitHub · Taskboard · Architecture Decision Records</small></div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section security-section" id="security">
+        <div class="container">
+          <div class="security-intro">
+            <p class="section-kicker light">05 / Security & privacy</p>
+            <h2>安全不是一句保證，而是一組可以檢查的邊界。</h2>
+            <p>以下為目前已實作的公開摘要，不代表零風險、完整匿名化或任何形式的合規認證。</p>
+          </div>
+          <div class="security-grid">
+            <div><strong>Backend session</strong><span>登入狀態由後端管理，正式環境加入 CSRF 防護。</span></div>
+            <div><strong>User ownership</strong><span>帳單、固定支出與 Calendar credentials 依使用者隔離。</span></div>
+            <div><strong>Encrypted credentials</strong><span>Google access／refresh credentials 加密後儲存。</span></div>
+            <div><strong>Explicit AI consent</strong><span>上傳帳單前取得同意；Responses request 明確使用 <code>store=False</code>。</span></div>
+            <div><strong>OCR controls</strong><span>具備每位使用者與全站限制，以及 production kill switch。</span></div>
+            <div><strong>Deployment hardening</strong><span>依賴套件稽核與正式環境 filesystem permission 檢查。</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="quality">
+        <div class="container">
+          <div class="section-heading compact">
+            <p class="section-kicker">06 / Testing & quality</p>
+            <h2>每個 milestone 都留下可重跑的驗證證據。</h2>
+          </div>
+          <div class="metrics" aria-label="測試與品質數據">
+            <div><strong>173</strong><span>Pytest tests passing</span></div>
+            <div><strong>2</strong><span>Playwright E2E scenarios</span></div>
+            <div><strong>1280</strong><span>Desktop viewport checked</span></div>
+            <div><strong>375</strong><span>Mobile viewport checked</span></div>
+          </div>
+          <div class="quality-note">
+            <p><strong>Code quality</strong> Ruff checks passing。</p>
+            <p><strong>Dependencies</strong> Production 與 development dependencies 在最近一次 review 時未發現已知漏洞。</p>
+            <p class="fine-print">以上為專案驗證紀錄，不代表第三方安全認證或未來永遠不會出現弱點。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section process-section" id="process">
+        <div class="container">
+          <div class="section-heading compact">
+            <p class="section-kicker">07 / Development process</p>
+            <h2>需求與決策先落地，再讓程式碼跟上。</h2>
+          </div>
+          <ol class="process-track">
+            <li><span>01</span>Requirements</li>
+            <li><span>02</span>Architecture decisions</li>
+            <li><span>03</span>Taskboard issue</li>
+            <li><span>04</span>Implementation</li>
+            <li><span>05</span>Focused tests</li>
+            <li><span>06</span>Regression tests</li>
+            <li><span>07</span>Git checkpoint</li>
+            <li><span>08</span>Review</li>
+          </ol>
+          <blockquote>
+            開發過程使用 AI coding agent 協助實作、測試與程式碼修改；產品需求、架構規則、安全政策、範圍控制與驗收由開發者負責。
+          </blockquote>
+        </div>
+      </section>
+
+      <section class="section status-section" id="status">
+        <div class="container status-grid">
+          <div>
+            <p class="section-kicker">08 / Current status</p>
+            <h2>核心功能已完成，正在走向可公開使用的版本。</h2>
+          </div>
+          <div class="status-list">
+            <div class="is-done"><span>✓</span><p><strong>Core MVP</strong>完整的輸入、確認、追蹤與 Calendar 流程</p></div>
+            <div class="is-done"><span>✓</span><p><strong>Security hardening</strong>上線前的身份、隱私、依賴與濫用控制</p></div>
+            <div class="is-next"><span>→</span><p><strong>Production deployment</strong>下一個 milestone</p></div>
+            <div><span>·</span><p><strong>Live Demo</strong>Coming soon</p></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section future-section" id="future">
+        <div class="container">
+          <div class="section-heading compact">
+            <p class="section-kicker">09 / Future</p>
+            <h2>先證明產品有用，再增加基礎設施。</h2>
+          </div>
+          <div class="future-list">
+            <span>Production deployment</span>
+            <span>Automated off-site backups</span>
+            <span>PostgreSQL when scale requires it</span>
+            <span>Optional mobile app</span>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="container footer-grid">
+        <div><strong>BillSync</strong><span>固定支出管家</span></div>
+        <p>Designed and engineered as a practical MVP.</p>
+        <a href="#top">回到頂端 ↑</a>
+      </div>
+    </footer>
+  </body>
+</html>

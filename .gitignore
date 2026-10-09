@@ -1,0 +1,11 @@
+.DS_Store
+.env
+.env.*
+*.log
+*.sqlite
+*.sqlite3
+*.db
+credentials/
+tokens/
+uploads/
+.qa/
